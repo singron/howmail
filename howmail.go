@@ -364,7 +364,7 @@ func main() {
 		}
 	})
 
-	if err := http.ListenAndServe(fmt.Sprintf("[::]:%d", *portFlag), nil); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf("[::1]:%d", *portFlag), nil); err != nil {
 		log.Fatalf("Error in ListenAndServe: %v", err)
 	}
 }
