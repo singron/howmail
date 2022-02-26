@@ -47,6 +47,9 @@ func (c *Client) runRead(conn *dns.Conn, msgC chan<- *dns.Msg) {
 	defer conn.Close()
 	defer close(msgC)
 	for {
+		if err := conn.SetReadDeadline(time.Now().Add(30 * time.Second)); err != nil {
+			log.Printf("Error setting read deadline: %v", err)
+		}
 		msg, err := conn.ReadMsg()
 		if err != nil {
 			if err != io.EOF {
